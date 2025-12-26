@@ -1,10 +1,10 @@
 # Week 01 / Day 01 — Checklist
 
 ## Acceptance（驗收標準）
-- [ ] `week01/day01/` 結構完整（含三個 md + `lab/`）
-- [ ] `lab/` 內完成：create → rename → copy → delete（用 terminal 操作）
-- [ ] 至少 1 次 commit，且已 push
-- [ ] `notes.md`、`checklist.md`、`reflection.md` 都有內容
+- [x] `week01/day01/` 結構完整（含三個 md + `lab/`）
+- [x] `lab/` 內完成：create → rename → copy → delete（用 terminal 操作）
+- [x] 至少 1 次 commit，且已 push
+- [x] `notes.md`、`checklist.md`、`reflection.md` 都有內容
 
 ---
 
@@ -18,7 +18,7 @@
 - [x] 建立 Day01 必交檔案
   - [x] `week01/day01/notes.md`
   - [x] `week01/day01/checklist.md`
-  - [ ] `week01/day01/reflection.md`（待完成內容）
+  - [x] `week01/day01/reflection.md`（待完成內容）
 
 ---
 
@@ -34,7 +34,7 @@
 - [x] Copy（複製）
   - Bash：`cp <src> <dst>`
   - PowerShell：`Copy-Item <src> <dst>`
-- [ ] Delete（刪除）
+- [x] Delete（刪除）
   - Bash：`rm <file>`
   - PowerShell：`Remove-Item <file>`
 
@@ -44,7 +44,7 @@
 - [x] `git status` 確認變更
 - [x] `git add` + `git commit`
 - [x] `git push`
-- [ ] 更新今日 md 後再 commit（notes/reflection/checklist 有改就要記錄）
+- [x] 更新今日 md 後再 commit（notes/reflection/checklist 有改就要記錄）
 
 ---
 
