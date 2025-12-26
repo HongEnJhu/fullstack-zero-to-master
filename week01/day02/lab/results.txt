@@ -1,0 +1,41 @@
+== wc sample.txt ==
+      21      21     112 ./sample.txt
+== head sample.txt ==
+ERROR
+error
+INFO
+info
+WARN
+warn
+ERROR
+error
+INFO
+info
+== tail sample.txt ==
+warn
+ERROR
+ERROR
+ERROR
+WARN
+WARN
+WARN
+INFO
+INFO
+INFO
+== grep "error" sample.txt ==
+error
+error
+== grep -n "warn" sample.txt ==
+6:warn
+12:warn
+== cat sample.txt | grep "info" ==
+info
+info
+== grep -i "error" sample.txt ==
+ERROR
+error
+ERROR
+error
+ERROR
+ERROR
+ERROR
