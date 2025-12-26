@@ -1,0 +1,76 @@
+## Target:
+    - Directory: test_D/
+    - File: test.py
+Before:
+    `rw-r--r--@ 1 user  staff   0 Dec 27 04:29 test.py`
+    `drwxr-xr-x@ 2 user  staff  64 Dec 27 04:29 test_D`
+Change:
+    - test.py user:'rw-' -> 'rwx'
+    - test_D other:'r-x' -> '--x'
+After:
+    `-rwxr--r--@ 1 user  staff   0 Dec 27 04:29 test.py`
+    `drwxr-x--x@ 2 user  staff  64 Dec 27 04:29 test_D`
+
+---
+
+Test:
+
+### File: test.py
+- Read:
+  - Tried: `cat test.py`
+  - Result: PASS
+  - Observation: content printed normally
+
+- Write:
+  - Tried: `echo "# write test" >> test.py`
+  - Result: PASS
+  - Observation: file size increased / new line appended
+
+- Execute:
+  - Tried: `chmod 644 test.py && ./test.py`
+  - Result: FAIL
+  - Observation: permission denied (no execute bit)
+
+  - Tried: `chmod 744 test.py && ./test.py`
+  - Result: PASS
+  - Observation: script ran (printed output / no permission error)
+
+> Note: 如果 `./test.py` 不能跑，先讓它可執行（加 shebang 並放內容）：
+> `printf '#!/usr/bin/env python3\nprint("OK")\n' > test.py`
+
+---
+
+### Directory: test_D/
+> 目標：證明「資料夾的 x = 能不能進去/穿越」，不是執行檔案
+
+- Traverse (x):
+  - Tried: `chmod u=wx test_D && cd test_D`
+  - Result: PASS
+  - Observation: can `cd` into directory with execute permission
+
+  - Tried: `pwd`
+  - Result: PASS
+  - Observation: now inside `.../test_D`
+
+- List names (r + x 才能 ls):
+  - Tried: `cd .. && chmod u=wx test_D && ls test_D`
+  - Result: FAIL (或顯示 Permission denied / cannot open directory)
+  - Observation: without read bit, cannot list directory entries
+
+  - Tried: `chmod u=rx test_D && ls test_D`
+  - Result: PASS
+  - Observation: directory entries can be listed again
+
+- Create/Delete inside (w + x 才能在裡面增刪改):
+  - Tried: `chmod u=wx test_D && touch test_D/a.txt`
+  - Result: PASS
+  - Observation: file created inside directory
+
+  - Tried: `chmod u=rx test_D && touch test_D/b.txt`
+  - Result: FAIL
+  - Observation: cannot create file without write permission on directory
+
+- Restore:
+  - Tried: `chmod u=rwx test_D`
+  - Result: PASS
+  - Observation: directory permissions restored
